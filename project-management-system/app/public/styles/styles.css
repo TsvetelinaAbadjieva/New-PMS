@@ -1,0 +1,19 @@
+.imgHomePage{
+    width: 100%;
+    height: 100%;
+}
+.projectCards > li{
+    list-style-type: 'none';
+    display: 'inline';
+    float:'left';
+    position: 'absolute';
+    max-width: 20rem;
+}
+.section{
+    list-style-type: none;
+    background-color: lightgrey;
+    width:25%;
+    float:left;
+    margin-right:5px;
+    margin-top:5px;
+}
