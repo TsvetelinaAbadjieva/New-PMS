@@ -179,7 +179,7 @@
     <div class="container">
       <div id="project_board" class="projectBoard">
 
-        <div class="section-container">
+        <div class="section-container" style="background: url('')">
             <ul class="section">
                 <!--template for one section-start-->
                 <li>
@@ -187,7 +187,8 @@
                         <div class="card-body">
                             <h4 class="card-title">Special title treatment</h4>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">View Task</button>                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">View Task</button>
+                        </div>
                     </div>
                 </li>
                 <!--template for one section- end-->
@@ -200,7 +201,8 @@
                         </div>
                     </div>
                 </li>
-                <li> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTask" data-whatever="@mdo">Add New Task</button></li>
+                <li> <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#newTask" data-whatever="@mdo">New Task</button></li>
+                <li> <button type="button" id="newSection" class="btn btn-primary">New Section</button></li>
             </ul>
          </div>
 
@@ -212,30 +214,32 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <label for="">Title</label>
-                    <h4 class="modal-title" id="task" data-taskId="">Task title</h5>
-                        <label for="">Responsible</label>
-                        <h5 id="responsible" data-respId="">Responsible</h5>
-                        <label for="">Due date</label>
-                        <h5 id="dueDate">Due date</h5>
-                        <label for="">Description</label>
-                        <h4 class="modal-title" id="description">Description</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="task">Task title</h4>
+                      <label for="">Responsible</label>
+                      <h5 id="responsible">Responsible</h5>
+                      <label for="">Due date</label>
+                      <input type="date" id="newDueDate">
+                      <h5 id="dueDate">Due date</h5>
+                      <label for="">Description</label>
+                      <h4 class="modal-title" id="description" contenteditable="true">Description</h5>
+                      <button type="button" id="editTask" class="btn btn-primary">Edit</button>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
                             <label for="recipient-name" class="form-control-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="text" class="form-control" id="commentId">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Message:</label>
-                            <textarea class="form-control" data-commentId="" id="comment"></textarea>
+                            <textarea class="form-control" id="comment"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" id="sendComment" class="btn btn-primary">Send message</button>
                 </div>
             </div>
         </div>
