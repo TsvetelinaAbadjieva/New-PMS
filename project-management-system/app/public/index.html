@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </nav>
-            <img src="http://www.techware.com.br/wp-content/uploads/2016/07/cloud-1.jpg" alt="" class="imgHomePage"></div>
+            <img src="http://www.techware.com.br/wp-content/uploads/2016/07/cloud-1.jpg" alt="" class="imgHomePage" id="imgHomePage"></div>
     </div>
     <!--End navbar-->
     <!--Register form begin-->
@@ -177,6 +177,8 @@
 
     <!--ProjectSections start-->
     <div class="container">
+      <div id="project_board" class="projectBoard">
+
         <div class="section-container">
             <ul class="section">
                 <!--template for one section-start-->
@@ -200,6 +202,8 @@
                 </li>
                 <li> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTask" data-whatever="@mdo">Add New Task</button></li>
             </ul>
+         </div>
+
         </div>
     </div>
     <!--Modal for display existing task-->
@@ -243,33 +247,33 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <label for="">Title</label>
-                    <input type="text" class="form-control" id="taskTitle">
-                    <label for="">Responsible</label>
-                    <select name="responsible" id="responsible">
-                            <option value="user_id">User</option>
-                        </select>
-                    <label for="">Due date</label>
-                    <h5 id="dueDate">Due date</h5>
-                    <label for="">Description</label>
-                    <h4 class="modal-title" id="description">Description</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <form>
+                      <div class="form-group">
+                        <label for="">Responsible</label>
+                        <select class="form-group" name="responsible" id="responsible">
+                                <option value="" class="form-group">User</option>
+                        </select>
+                        <button type="button" class="btn btn-primary" id="add_user">Add</button>
+
+                        <label for="">Due date</label>
+                        <input type="date" class="form-group" id="task_due_date">
+                      </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="form-control-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="recipient-name" class="form-control-label" >Title:</label>
+                            <input type="text" class="form-control"  id="task_title_id">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Message:</label>
-                            <textarea class="form-control" data-commentId="" id="comment"></textarea>
+                            <label for="message-text" class="form-control-label" >Description:</label>
+                            <textarea class="form-control" data-commentId="" id="task_description"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" class="btn btn-primary" id="save_task">Save</button>
                 </div>
             </div>
         </div>
@@ -279,12 +283,19 @@
     <!--ProjectSections end-->
     <script>
         const BASE_URL = "http://localhost:8000";
+        const HELP = BASE_URL+"/help";
+        const HOME = BASE_URL+"/home";
+        const REGISTRATION = BASE_URL+"/registration";
+        const LOGIN = BASE_URL+"/login";
+        const PROJECT_DASHBOARD = BASE_URL+"/projectDashboard";
+        const PROJECT = BASE_URL+"/projectDetails";
     </script>
-    <script src="http://localhost:8000/help"></script>
-    <script src="http://localhost:8000/home"></script>
-    <script src="http://localhost:8000/registration"></script>
-    <script src="http://localhost:8000/login"></script>
+    <script src=HELP></script>
+    <script src=HOME></script>
+    <script src=REGISTRATION></script>
+    <script src=LOGIN></script>
     <script src="http://localhost:8000/projectDashboard"></script>
+    <script src="http://localhost:8000/projectDetails"></script>
 </body>
 
 </html>

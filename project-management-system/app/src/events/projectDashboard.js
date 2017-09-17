@@ -129,6 +129,8 @@ drawProjectBoardCollection = function (data) {
             cloned.querySelector('h4').innerText = data[i].title;
             cloned.querySelector('h4').style.color = 'grey';
             cloned.querySelector('#assignMe').setAttribute('data_project_id', data[i].id);
+            cloned.querySelector('#goToProject').setAttribute('data_project_id', data[i].id);
+            cloned.querySelector('#goToProject').addEventListener('click', redirectToProject);
             cloned.querySelector('#assignMe').addEventListener('click', assignMe);
             cloned.querySelector('p').innerText = data[i].description;
             cloned.setAttribute('data_project_id', data[i].id);
@@ -237,3 +239,15 @@ function assignMe() {
       //item.parentNode.removeChild(item);
     }
   };
+
+  function redirectToProject() {
+    console.log(this);
+    var info = document.getElementById('userLoggedIn').innerText;
+    var projectTitle = document.getElementById('project_'+this.getAttribute('data_project_id')).querySelector('h4').innerText;
+    document.getElementById('project_board').setAttribute('data_project_id', this.getAttribute('data_project_id'));
+    document.getElementById('project_board').id = 'project_board_'+this.getAttribute('data_project_id');
+    document.getElementById('projectDashboard').style.display = 'none';
+    document.getElementById('imgHomePage').style.display = 'none';
+    document.getElementById('userLoggedIn').innerText = localStorage.getItem('user') +", Welcome to "+projectTitle;
+    document.getElementById('userLoggedIn').style.display = 'block';
+  }

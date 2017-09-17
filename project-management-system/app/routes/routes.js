@@ -41,6 +41,10 @@ app.get('/projectDashboard', function (req, res) {
 
   res.sendFile(path.resolve(__dirname + '/../src/events/projectDashboard.js'));
 });
+app.get('/projectDetails', function (req, res) {
+
+  res.sendFile(path.resolve(__dirname + '/../src/events/project.js'));
+});
 app.get('/style', function (req, res) {
 
   res.sendFile(path.resolve(__dirname + '/../public/styles/styles.css'));
