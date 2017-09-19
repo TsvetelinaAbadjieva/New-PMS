@@ -20,3 +20,12 @@
 .projectBoard{
   background-image:  url("http://skillstechindia.com/images/project-management.jpg");
 }
+.sectionHead{
+    color:#105990;
+}
+.taskStatus {
+    background-color:lightseagreen;
+    height: 30px;
+    border-radius: 3px;
+    float: right;
+}

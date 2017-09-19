@@ -140,6 +140,79 @@ app.post('/project', ensureToken, function (req, res, next) {
     });
   });
 
+app.post('/task', ensureToken, function (req, res, next) {
+  console.log('In request');
+  // req.body.id = 51;
+  jwt.verify(req.token, 'someSecretKey', function (err, req) {
+    if (err) {
+      res.sendStatus(403);
+      res.message('Operation Impossible!')
+    }
+  });
+    //this is user id
+    var decodedToken = jwt.decode(req.token);
+
+     var task = {
+          userId: decodedToken,
+          projectId: req.body.projectId,
+          sectionId: req.body.sectionId,
+          statusId: req.body.statusId,
+          task: req.body.task,
+          description: req.body.description,
+          startDate: req.body.startDate,
+          dueDate: req.body.dueDate
+    };
+
+    fc.insertTask(task, function(error, data) {
+      if(error) {
+        res.json({status:403, message:'Operation unsuccessful'})
+      }
+      if(data[0].id > 0) {
+        res.json({status:200, message:'Task inserted into Database', data: data[0].id})
+      }
+      else {
+        res.json({status:400, message:'Something went wrong'})
+      }
+    });
+  });
+
+
+app.post('/section', ensureToken, function (req, res, next) {
+  console.log('In request');
+  // req.body.id = 51;
+  jwt.verify(req.token, 'someSecretKey', function (err, req) {
+    if (err) {
+      res.sendStatus(403);
+      res.message('Operation Impossible!')
+    }
+  });
+
+    //this is user id
+    //var decodedToken = jwt.decode(req.token);
+
+    var section = {
+      section: req.body.section,
+      projectId: req.body.projectId
+    };
+
+    // var section = {
+    //   section: 'TO DO',
+    //   projectId: 1
+    // };
+    fc.insertSection(section, function(error, data) {
+      if(error) {
+        res.json({status:403, message:'Operation unsuccessful'})
+      }
+      if(data.length > 0) {
+        res.json({status:200, message:'Project inserted into Database'+data[0].id, data: data[0].id})
+      }
+      else {
+        res.json({status:400, message:'Something went wrong'})
+      }
+    });
+  });
+
+
 app.get('/projects', ensureToken, function (req, res, next) {
   console.log('In request');
   // req.body.id = 51;

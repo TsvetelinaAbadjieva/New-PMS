@@ -3,8 +3,8 @@ var con = mysql.createConnection({
 
     host: "localhost",
     user: "root",
-    password: "root",
     password: "",
+  //  password: "root",
     database: "project_management_system"
 });
 var passwordHash = require('password-hash');
@@ -19,23 +19,25 @@ exports.insertTask = function (task, func) {
 
     var tu = [];
     //INSERT INTO `user` (`name`) VALUES ('John');
-    var sql = "INSERT INTO `task` (user_id, project_id, section_id, status_id, task, description, start_date, due_date) VALUES ?";
-    tu.push(task.user_id);
-    tu.push(task.project_id);
-    tu.push(task.section_id);
-    tu.push(task.status_id);
+    var sql = "INSERT INTO `task` (user_id, project_id, section_id, status_id, task, description, start_date, due_date) VALUES (?,?,?,?,?,?,?,?)";
+    tu.push(task.userId);
+    tu.push(task.projectId);
+    tu.push(task.sectionId);
+    tu.push(task.statusId);
     tu.push(task.task);
     tu.push(task.description);
-    tu.push(task.start_date);
-    tu.push(task.due_date);
+    tu.push(task.startDate);
+    tu.push(task.dueDate);
     var values = [tu];
 
-    con.query(sql, values, function (err, result) {
+    con.query(sql, [parseInt(task.userId), parseInt(task.projectId), parseInt(task.sectionId), parseInt(task.statusId) ,task.task, task.description, task.startDate, task.dueDate], function (err) {
         if (err) throw err;
-        console.log("Number of records inserted: " + result.affectedRows);
-        func(err, result.affectedRows);
-    });
+         var sqlId = "SELECT max(id) AS id FROM task";
 
+        con.query(sqlId, function (err, result) {
+            func(err, result);
+        });
+    });
 };
 
 exports.insertComment = function (comment, func) {
@@ -79,15 +81,37 @@ exports.insertSection = function (section, func) {
 
     var tu = [];
     //INSERT INTO `user` (`name`) VALUES ('John');
-    var sql = "INSERT INTO `section` (section, project_id) VALUES ?";
+    //var sqlId = "SELECT max(id) FROM section";
+    var sql = "INSERT INTO `section` (section, project_id) VALUES (?,?);";
+    // var sqlId = "SELECT max(id) FROM section";
+
+    tu.push(section.section);
+    tu.push(section.projectId);
+    var values = [tu];
+
+    con.query(sql, [section.section, section.projectId], function (err) {
+        if (err) throw err;
+        var sqlId = "SELECT max(id) AS id FROM section";
+
+        con.query(sqlId, function (err, result) {
+            func(err, result);
+        });
+    });
+};
+
+exports.lastInsertedSection = function (section, func) {
+
+    var tu = [];
+    //INSERT INTO `user` (`name`) VALUES ('John');
+    var sqlId = "SELECT max(id) FROM section";
+    //var sql = "INSERT INTO `section` (title, project_id) VALUES ?";
     tu.push(section.section);
     tu.push(section.project_id);
     var values = [tu];
+    exports.insertSection(section, function (error, result) {
+        if (error) throw error;
+        func(err, result);
 
-    con.query(sql, values, function (err, result) {
-        if (err) throw err;
-        console.log("Number of records inserted: " + result.affectedRows);
-        func(err, result.affectedRows);
     });
 };
 
@@ -154,7 +178,7 @@ exports.insertUser = function (user, func) {
             func(resultMessage);
         });
 
-    })
+    });
 
 };
 exports.getUserCollection = function (func) {
@@ -216,10 +240,10 @@ exports.getSectionCollectionByProject = function (res, projectId, func) {
 exports.getProjectCollectionByUser = function (res, userId, func) {
 
     var sql = "SELECT * " +
-        " FROM project_management_system.project "+
+        " FROM project_management_system.project " +
         " JOIN project_management_system.project_user " +
         " ON project.id = project_user.project_id "
-        " WHERE project_user.user_id = ?";
+    " WHERE project_user.user_id = ?";
     var resultCollection = [];
     con.query(sql, [parseInt(userId)], function (err, result) {
 
@@ -248,15 +272,15 @@ exports.getProjectCollection = function (res, func) {
     });
 };
 
-exports.assignToProject = function(userProject, func) {
+exports.assignToProject = function (userProject, func) {
 
-  var sql = "INSERT INTO project_user (project_id, user_id) VALUES (?,?)";
+    var sql = "INSERT INTO project_user (project_id, user_id) VALUES (?,?)";
 
-  con.query(sql, [userProject.projectId, userProject.id], function (err, result) {
-      if (err) throw err;
-      console.log("Number of records inserted: " + result.affectedRows);
-      func(err, result.affectedRows);
-  });
+    con.query(sql, [userProject.projectId, userProject.id], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+        func(err, result.affectedRows);
+    });
 }
 //select tasks from section
 //get tasks from  given section
