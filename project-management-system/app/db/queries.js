@@ -13,6 +13,15 @@ con.connect(function (err) {
     if (err) throw err;
 });
 
+// SELECT * FROM project_management_system.task
+// JOIN project_management_system.section
+// ON section.id = task.section_id
+// JOIN project_management_system.task_status
+// ON task_status.id = task.status_id
+// JOIN
+// project_management_system.project
+// ON project.id = task.project_id;
+
 exports.insertTask = function (task, func) {
 
     // var user = JSON.parse(user);
