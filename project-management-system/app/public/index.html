@@ -193,7 +193,7 @@
                     <li id="cardDefault">
                         <div class="card" style="width: 40rem;">
                             <div class="card-body">
-                                <h4 class="card-title" id="taskTitle" style="width: 20rem;">Special title treatment</h4>
+                                <h4 class="card-title" id="taskTitle" style="width: 20rem;">Special title treatment <span><button for="" class="btn taskStatus">Status</button></span></h4>
                                 <p class="card-body" id="taskDescription" style="width: 20rem;">With supporting text below as a natural lead-in to additional content.</p>
                                 <button type="button" id="viewTaskOpen" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">View Task</button>
                             </div>
@@ -212,15 +212,16 @@
                     <li>
                         <hr style="width: 20rem; float:left">
                     </li>
-                    <li> <button type="button" id="newSection" class="btn btn-primary">New Section</button><button type="button"
+                    <li> <button type="button" id="newSection" class="btn btn-default large">New Section</button><button type="button"
                             id="newTaskOpen" class="btn btn-primary" data-toggle="modal" data-target="#newTask" data-whatever="@mdo">New Task</button></li>
-                    <li> <input type="text" id="newSectionTitle" class="form-group"><button type="button" id="addSection" class="btn btn-primary"
+                    <li> <input type="text" id="newSectionTitle" class="form-group"><button type="button" id="addSection" class="btn btn-primary larger"
                             class="form-group">Add</button></li>
                     <li>
                         <div id="alertCreateSection" class="alert alert-danger" role="alert" style="margin-right: 30px;">
                             This is a danger alert—check it out!
                         </div>
                     </li>
+                    <li><hr style="width: 20rem; float:left;"></li>
                 </ul>
             </div>
 
@@ -235,8 +236,12 @@
                     <h4 class="modal-title" id="task">Task title</h4>
                     <label for="">Description</label>
                     <h4 class="modal-title" id="description" contenteditable="true">Description</h5>
-                        <label for="">Responsible</label>
-                        <h5 id="responsible">Responsible</h5>
+                    <label for="">Due date</label>
+                    <h5 id="dueDate">Due date</h5>
+                    <label for="">Responsible</label>
+                    <h5 id="responsible">Responsible</h5>
+
+                    <div  id="editTaskArea" style="display:none">
                         <label for="">Attach another responsible to this task</label>
                         <select class="form-group" name="responsible" id="responsible">
                                 <option value="" class="form-group">User</option>
@@ -251,7 +256,8 @@
                             <option value="0">----</option>
                         </select>
                         </p>
-                        <h5 id="dueDate">Due date</h5>
+                    </div>
+
                         <button type="button" id="editTask" class="btn btn-primary">Edit</button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>

@@ -22,10 +22,16 @@
 }
 .sectionHead{
     color:#105990;
+    padding-top:25px;
+    padding-left:15px;
+    margin:0 auto;
 }
 .taskStatus {
     background-color:lightseagreen;
     height: 30px;
     border-radius: 3px;
     float: right;
+}
+.btn{
+  margin:5px;
 }

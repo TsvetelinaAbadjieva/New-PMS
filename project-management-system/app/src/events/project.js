@@ -5,10 +5,16 @@ document.getElementById('saveTask').addEventListener('click', function () {
   var taskDueDate = document.getElementById('taskDueDateInput').value;
   var projectId = taskProjectId;
   var sectionId = taskSectionId || 0;
-
+  var taskTemplate = null;
+console.log(document.getElementById('sectionDefault').querySelector('#cardDefault'))
   var alert = document.getElementById('alertInsertTask');
-  var taskTemplate = document.getElementById('section_id_' + sectionId).querySelector('#cardDefault')
-  || document.getElementById('sectionDefault').querySelector('#cardDefault');
+  if (document.getElementById('sectionDefault').querySelector('#cardDefault')) {
+    taskTemplate = document.getElementById('sectionDefault').querySelector('#cardDefault');
+  }
+  else if(document.getElementById('section_id_' + sectionId).querySelector('#cardDefault')) {
+    taskTemplate = document.getElementById('section_id_' + sectionId).querySelector('#cardDefault');
+  }
+
   var newTask = document.createElement('li');
   newTask = taskTemplate.cloneNode(true);
   var _document = document;
@@ -64,7 +70,13 @@ document.getElementById('saveTask').addEventListener('click', function () {
         newTask.style.display = 'block';
 
        // var parent = _document.getElementById('section_id_' + sectionId).querySelector('#tasks');
-        var sibling = _document.getElementById('section_id_' + sectionId).querySelector('#cardDefault');
+        var sibling = null;
+        if(_document.getElementById('sectionDefault').querySelector('#cardDefault')) {
+          sibling = _document.getElementById('sectionDefault').querySelector('#cardDefault');
+        }
+        else if(_document.getElementById('section_id_' + sectionId).querySelector('#cardDefault')){
+          sibling = _document.getElementById('section_id_' + sectionId).querySelector('#cardDefault');
+        }
         var parent = sibling.parenNode;
         console.log(sibling);
         console.log('-parent-')
