@@ -41,6 +41,10 @@ app.get('/projectDashboard', function (req, res) {
 
   res.sendFile(path.resolve(__dirname + '/../src/events/projectDashboard.js'));
 });
+app.get('/projectDetails', function (req, res) {
+
+  res.sendFile(path.resolve(__dirname + '/../src/events/project.js'));
+});
 app.get('/style', function (req, res) {
 
   res.sendFile(path.resolve(__dirname + '/../public/styles/styles.css'));
@@ -72,6 +76,7 @@ app.post('/register', function (req, res) {
   });
 
 });
+
 
 app.post('/login', function (req, res) {
 
@@ -105,8 +110,7 @@ app.post('/login', function (req, res) {
   });
 });
 
-
-app.get('/user/projects', ensureToken, function (req, res, next) {
+app.post('/project', ensureToken, function (req, res, next) {
   console.log('In request');
   // req.body.id = 51;
   jwt.verify(req.token, 'someSecretKey', function (err, req) {
@@ -115,17 +119,99 @@ app.get('/user/projects', ensureToken, function (req, res, next) {
       res.message('Operation Impossible!')
     }
   });
-  var decodedToken = jwt.decode(req.token);
-  console.log(decodedToken);
-  fc.getProjectCollectionByUser(res, decodedToken, function (res, error, data) {
-    if (error) {
-      res.json({ status: 400, message: 'Data could not be retrieved' })
-    }
-    console.log(data);
-
-    res.json({ status: 200, message: 'Data retrieved', data: data });
+    //this is user id
+    //var decodedToken = jwt.decode(req.token);
+    var project = {
+      title: req.body.title,
+      description: req.body.description,
+      startDate: req.body.startDate,
+      dueDate: req.body.dueDate,
+    };
+    fc.insertProject(project, function(error, data) {
+      if(error) {
+        res.json({status:403, message:'Operation unsuccessful'})
+      }
+      if(data > 0) {
+        res.json({status:200, message:'Project inserted into Database'})
+      }
+      else {
+        res.json({status:400, message:'Something went wrong'})
+      }
+    });
   });
-});
+
+app.post('/task', ensureToken, function (req, res, next) {
+  console.log('In request');
+  // req.body.id = 51;
+  jwt.verify(req.token, 'someSecretKey', function (err, req) {
+    if (err) {
+      res.sendStatus(403);
+      res.message('Operation Impossible!')
+    }
+  });
+    //this is user id
+    var decodedToken = jwt.decode(req.token);
+
+     var task = {
+          userId: decodedToken,
+          projectId: req.body.projectId,
+          sectionId: req.body.sectionId,
+          statusId: req.body.statusId,
+          task: req.body.task,
+          description: req.body.description,
+          startDate: req.body.startDate,
+          dueDate: req.body.dueDate
+    };
+
+    fc.insertTask(task, function(error, data) {
+      if(error) {
+        res.json({status:403, message:'Operation unsuccessful'})
+      }
+      if(data[0].id > 0) {
+        res.json({status:200, message:'Task inserted into Database', data: data[0].id})
+      }
+      else {
+        res.json({status:400, message:'Something went wrong'})
+      }
+    });
+  });
+
+
+app.post('/section', ensureToken, function (req, res, next) {
+  console.log('In request');
+  // req.body.id = 51;
+  jwt.verify(req.token, 'someSecretKey', function (err, req) {
+    if (err) {
+      res.sendStatus(403);
+      res.message('Operation Impossible!')
+    }
+  });
+
+    //this is user id
+    //var decodedToken = jwt.decode(req.token);
+
+    var section = {
+      section: req.body.section,
+      projectId: req.body.projectId
+    };
+
+    // var section = {
+    //   section: 'TO DO',
+    //   projectId: 1
+    // };
+    fc.insertSection(section, function(error, data) {
+      if(error) {
+        res.json({status:403, message:'Operation unsuccessful'})
+      }
+      if(data.length > 0) {
+        res.json({status:200, message:'Project inserted into Database'+data[0].id, data: data[0].id})
+      }
+      else {
+        res.json({status:400, message:'Something went wrong'})
+      }
+    });
+  });
+
 
 app.get('/projects', ensureToken, function (req, res, next) {
   console.log('In request');
@@ -145,6 +231,95 @@ app.get('/projects', ensureToken, function (req, res, next) {
     console.log(data);
 
     res.json({ status: 200, message: 'Data retrieved', data: data });
+  });
+});
+
+//retrieve all users by project
+app.post('/project/users', ensureToken, function (req, res, next) {
+  console.log('In request');
+  // req.body.id = 51;
+  jwt.verify(req.token, 'someSecretKey', function (err, req) {
+    if (err) {
+      res.sendStatus(403);
+      res.message('Operation Impossible!')
+    }
+  });
+//  var decodedToken = jwt.decode(req.token);
+//  console.log(decodedToken);
+//req.body.projectId = 2;
+  fc.getUserByProjectCollection(req.body.projectId, function (error, data) {
+    if (error) {
+      res.json({ status: 400, message: 'Data could not be retrieved' })
+    }
+    console.log(data);
+
+    res.json({ status: 200, message: 'Data retrieved', data: data });
+  });
+});
+
+//---------------------------
+// app.get('/projects', ensureToken, function (req, res, next) {
+//   console.log('In request');
+//   // req.body.id = 51;
+//   jwt.verify(req.token, 'someSecretKey', function (err, req) {
+//     if (err) {
+//       res.sendStatus(403);
+//       res.message('Operation Impossible!')
+//     }
+//   });
+//   var decodedToken = jwt.decode(req.token);
+//   console.log(decodedToken);
+//   fc.getProjectCollection(res, decodedToken, function (res, error, data) {
+//     if (error) {
+//       res.json({ status: 400, message: 'Data could not be retrieved' })
+//     }
+//     res.json({ status: 200, message: 'Data retrieved', data: data });
+//   });
+// });
+//-------------------
+app.get('/user/projects', ensureToken, function (req, res, next) {
+  console.log('In request');
+  // req.body.id = 51;
+  jwt.verify(req.token, 'someSecretKey', function (err, req) {
+    if (err) {
+      res.sendStatus(403);
+      res.message('Operation Impossible!')
+    }
+  });
+  var decodedToken = jwt.decode(req.token);
+  fc.getProjectCollectionByUser(res, decodedToken, function (res, error, data) {
+    if (error) {
+      res.json({ status: 400, message: 'Data could not be retrieved' })
+    }
+    res.json({ status: 200, message: 'Data retrieved', data: data });
+  });
+});
+
+app.post('/project/assign', ensureToken, function (req, res, next) {
+  console.log('In request');
+  // req.body.id = 51;
+  jwt.verify(req.token, 'someSecretKey', function (err, req) {
+    if (err) {
+      res.sendStatus(403);
+      res.message('Operation Impossible!')
+    }
+  });
+  var decodedToken = jwt.decode(req.token);
+  //var bodyParsed = JSON.parse(req.body);
+  var userProject = {
+                      projectId: req.body.projectId,
+                      id: decodedToken
+                    };
+  fc.assignToProject(userProject, function (error, data) {
+    if (error) {
+      res.json({ status: 400, message: 'User is NOT assigned to this project' });
+    }
+    if(data > 0) {
+      res.json({ status: 200, message: 'You are assigned to this project'});
+    }
+    else {
+      res.json({ status: 400, message: 'You are NOT assigned to this project'});
+    }
   });
 });
 

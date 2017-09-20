@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </nav>
-            <img src="http://www.techware.com.br/wp-content/uploads/2016/07/cloud-1.jpg" alt="" class="imgHomePage"></div>
+            <img src="http://www.techware.com.br/wp-content/uploads/2016/07/cloud-1.jpg" alt="" class="imgHomePage" id="imgHomePage"></div>
     </div>
     <!--End navbar-->
     <!--Register form begin-->
@@ -151,55 +151,80 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Project title</label>
                             <input type="text" class="form-control" id="projectTitleInput" aria-describedby="emailHelp" placeholder="Project title">
-                        </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Project description</label>
-                            <input type="text" class="form-control" id="projectDescriptionInput" aria-describedby="emailHelp" placeholder="Project description">
-                            <label for="exampleInputEmail1">Due Date</label>
-                            <input type="date" class="form-control" id="projectDateInput" aria-describedby="emailHelp" placeholder="Due Date">
-                            <div class="card-footer bg-transparent border-success">
-                                <button type="button" class="btn btn-secondary" id="saveProject" style="margin:15px; width:120px;">Save</button>
-                                <button type="button" class="btn btn-secondary" id="closeProject" style="margin:15px; width:120px;">Close</button>
-                            </div>
-                            <div id="alertInsertProject" class="alert alert-danger" role="alert">
-                                This is a danger alert—check it out!
-                            </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Project description</label>
+                        <input type="text" class="form-control" id="projectDescriptionInput" aria-describedby="emailHelp" placeholder="Project description">
+                        <label for="exampleInputEmail1">Due Date</label>
+                        <input type="date" class="form-control" id="projectDateInput" aria-describedby="emailHelp" placeholder="Due Date">
+                        <div class="card-footer bg-transparent border-success">
+                            <button type="button" class="btn btn-secondary" id="saveProject" style="margin:15px; width:120px;">Save</button>
+                            <button type="button" class="btn btn-secondary" id="closeProject" style="margin:15px; width:120px;">Close</button>
                         </div>
+                        <div id="alertInsertProject" class="alert alert-danger" role="alert">
+                            This is a danger alert—check it out!
+                        </div>
+                    </div>
 
                     </form>
-                  </div>
-              </div>
-          </li>
-        </ul>
+                </div>
+    </div>
+    </li>
+    </ul>
     </div>
     <!--ProjectBoard end-->
 
     <!--ProjectSections start-->
     <div class="container">
-        <div class="section-container">
-            <ul class="section">
-                <!--template for one section-start-->
-                <li>
-                    <div class="card" style="width: 20rem;">
-                        <div class="card-body">
-                            <h4 class="card-title">Special title treatment</h4>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">View Task</button>                            </div>
-                    </div>
-                </li>
-                <!--template for one section- end-->
-                <li>
-                    <div class="card" style="width: 20rem;">
-                        <div class="card-body">
-                            <h4 class="card-title">Special title treatment</h4>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">View Task</a>
+        <h3 id="project_title_head">Project name</h3>
+        <div id="project_board" class="projectBoard">
+
+            <div class="section-container" id="sectionDefault" style="background: url('')">
+
+                <ul class="section" id="tasks">
+                    <!--template for one section-start-->
+                    <li>
+                        <h4 id="section_head" class="sectionHead">Default Section</h4>
+                    </li>
+                    <li>
+                        <hr style="width: 20rem; float:left;">
+                    </li>
+                    <li id="cardDefault">
+                        <div class="card" style="width: 40rem;">
+                            <div class="card-body">
+                                <h4 class="card-title" id="taskTitle" style="width: 20rem;">Special title treatment <span><button for="" class="btn taskStatus">Status</button></span></h4>
+                                <p class="card-body" id="taskDescription" style="width: 20rem;">With supporting text below as a natural lead-in to additional content.</p>
+                                <button type="button" id="viewTaskOpen" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">View Task</button>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTask" data-whatever="@mdo">Add New Task</button></li>
-            </ul>
+                    </li>
+                    <!--template for one section- end-->
+                    <!-- <li>
+                        <div class="card" style="width: 20rem;">
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">View Task</a>
+                            </div>
+                        </div>
+                    </li> -->
+                    <li>
+                        <hr style="width: 20rem; float:left">
+                    </li>
+                    <li> <button type="button" id="newSection" class="btn btn-default large">New Section</button><button type="button"
+                            id="newTaskOpen" class="btn btn-primary" data-toggle="modal" data-target="#newTask" data-whatever="@mdo">New Task</button></li>
+                    <li> <input type="text" id="newSectionTitle" class="form-group"><button type="button" id="addSection" class="btn btn-primary larger"
+                            class="form-group">Add</button></li>
+                    <li>
+                        <div id="alertCreateSection" class="alert alert-danger" role="alert" style="margin-right: 30px;">
+                            This is a danger alert—check it out!
+                        </div>
+                    </li>
+                    <li><hr style="width: 20rem; float:left;"></li>
+                </ul>
+            </div>
+
         </div>
     </div>
     <!--Modal for display existing task-->
@@ -207,31 +232,50 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <label for="">Title</label>
-                    <h4 class="modal-title" id="task" data-taskId="">Task title</h5>
-                        <label for="">Responsible</label>
-                        <h5 id="responsible" data-respId="">Responsible</h5>
-                        <label for="">Due date</label>
-                        <h5 id="dueDate">Due date</h5>
-                        <label for="">Description</label>
-                        <h4 class="modal-title" id="description">Description</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <label for="">Title</label> <button for="" class="btn taskStatus">Status</button>
+                    <h4 class="modal-title" id="task">Task title</h4>
+                    <label for="">Description</label>
+                    <h4 class="modal-title" id="description" contenteditable="true">Description</h5>
+                    <label for="">Due date</label>
+                    <h5 id="dueDate">Due date</h5>
+                    <label for="">Responsible</label>
+                    <h5 id="responsible">Responsible</h5>
+
+                    <div  id="editTaskArea" style="display:none">
+                        <label for="">Attach another responsible to this task</label>
+                        <select class="form-group" name="responsible" id="responsible">
+                                <option value="" class="form-group">User</option>
+                            </select>
+
+                        <button type="button" class="btn btn-primary" id="add_user">Add</button>
+                        <p>
+                            <label for="">Due date</label>
+                            <input type="date" id="newDueDate">
+                            <label for="">Change Status</label>
+                            <select name="changeStatus" id="changeStatus">
+                            <option value="0">----</option>
+                        </select>
+                        </p>
+                    </div>
+
+                        <button type="button" id="editTask" class="btn btn-primary">Edit</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
                             <label for="recipient-name" class="form-control-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="text" class="form-control" id="commentId">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Message:</label>
-                            <textarea class="form-control" data-commentId="" id="comment"></textarea>
+                            <textarea class="form-control" id="comment"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" id="sendComment" class="btn btn-primary">Send message</button>
                 </div>
             </div>
         </div>
@@ -243,34 +287,41 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <label for="">Title</label>
-                    <input type="text" class="form-control" id="taskTitle">
-                    <label for="">Responsible</label>
-                    <select name="responsible" id="responsible">
-                            <option value="user_id">User</option>
-                        </select>
-                    <label for="">Due date</label>
-                    <h5 id="dueDate">Due date</h5>
-                    <label for="">Description</label>
-                    <h4 class="modal-title" id="description">Description</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4>New task details</h4>
+                    <small id="emailHelp" class="form-text text-muted">New task details</small>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="form-control-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="">Responsible</label>
+                            <select class="form-group" name="responsible" id="responsible">
+                                <option value="" class="form-group">User</option>
+                            </select>
+                            <button type="button" class="btn btn-primary" id="add_user">Add</button>
+
+                            <label for="">Due date</label>
+                            <input type="date" class="form-group" id="taskDueDateInput">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Message:</label>
-                            <textarea class="form-control" data-commentId="" id="comment"></textarea>
+                            <label for="recipient-name" class="form-control-label">Title:</label>
+                            <input type="text" class="form-control" id="taskTitleInput">
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Description:</label>
+                            <textarea class="form-control" data-commentId="" id="taskDescriptionInput"></textarea>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" class="btn btn-primary" id="saveTask">Save</button>
+                    <div id="alertInsertTask" class="alert alert-danger" role="alert" style="margin-right: 30px;">
+                        This is a danger alert—check it out!
+                    </div>
+
                 </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -279,12 +330,19 @@
     <!--ProjectSections end-->
     <script>
         const BASE_URL = "http://localhost:8000";
+        const HELP = BASE_URL + "/help";
+        const HOME = BASE_URL + "/home";
+        const REGISTRATION = BASE_URL + "/registration";
+        const LOGIN = BASE_URL + "/login";
+        const PROJECT_DASHBOARD = BASE_URL + "/projectDashboard";
+        const PROJECT = BASE_URL + "/projectDetails";
     </script>
-    <script src="http://localhost:8000/help"></script>
-    <script src="http://localhost:8000/home"></script>
-    <script src="http://localhost:8000/registration"></script>
-    <script src="http://localhost:8000/login"></script>
+    <script src=HELP></script>
+    <script src=HOME></script>
+    <script src=REGISTRATION></script>
+    <script src=LOGIN></script>
     <script src="http://localhost:8000/projectDashboard"></script>
+    <script src="http://localhost:8000/projectDetails"></script>
 </body>
 
 </html>
